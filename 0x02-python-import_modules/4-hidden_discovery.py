@@ -1,7 +1,8 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.8
 if __name__ == "__main__":
     import hidden_4
-    for name in dir(hidden_4):
-        if name.startswith("__"):
-           continue
-        print("{:s}".format(name))
+    files = dir(hidden_4)
+    for i in range(len(files)):
+        if (files[i][0:2] == "__"):
+            continue
+        print(files[i])
