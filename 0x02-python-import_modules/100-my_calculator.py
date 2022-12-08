@@ -1,17 +1,22 @@
-#!/usr/bin/python3
-if __name__ == '__main__':
+#!/usr/bin/python3.8
+if __name__ == "__main__":
     from calculator_1 import add, sub, mul, div
-    import sys
-    args = sys.argv
-    operators = {"+": add, "-": sub, "*": mul, "/": div}
-    if len(sys.argv) != 4:
-       print("Usage: ./100-my_calculator.py <a> <operator> <b>")
-       sys.exit(1)
-    if args[2] not in "+-*/":
+    from sys import argv, exit
+    if len(argv) != 4:
+        print("Usage: ./100-my_calculator.py <a> <operator> <b>")
+        exit(1)
+    if ord(argv[2]) < 42 or ord(argv[2]) > 47 or ord(argv[2]) == 46:
         print("Unknown operator. Available operators: +, -, * and /")
-        sys.exit(1)
-    a = int(args[1])
-    operator = args[2]
-    b = int(args[3])
-    c = operators[args[2]](a, b)
-    print("{:d} {:s} {:d} = {:d}".format(a, operator, b, c))
+        exit(1)
+    if ord(argv[2]) == 42:
+        print("{} * {} = {}".format(argv[1], argv[3],
+                                    mul(int(argv[1]), int(argv[3]))))
+    if ord(argv[2]) == 43:
+        print("{} + {} = {}".format(argv[1], argv[3],
+                                    add(int(argv[1]), int(argv[3]))))
+    if ord(argv[2]) == 45:
+        print("{} - {} = {}".format(argv[1], argv[3],
+                                    sub(int(argv[1]), int(argv[3]))))
+    if ord(argv[2]) == 47:
+        print("{} / {} = {}".format(argv[1], argv[3],
+                                    div(int(argv[1]), int(argv[3]))))
