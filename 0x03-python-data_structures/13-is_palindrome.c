@@ -1,24 +1,45 @@
 #include "lists.h"
 
+/**
+ * is_palindrome -  checks if a singly linked list is a palindrome
+ * @head: thie linked list
+ * Return: 1 true
+ */
 int is_palindrome(listint_t **head)
 {
-return (isPalindromeUtil(head, *head));
-}
+listint_t *tail, *rev, *new;
+int sig;
 
-int isPalindromeUtil(listint_t **left, listint_t *right)
-{
-int isp, is_p;
-
-if (!right)
+rev = *head;
+if (!rev || !rev->next)
 return (1);
 
-isp = isPalindromeUtil(left, right->next);
-if (!isp)
+tail = malloc(sizeof(listint_t));
+tail->n = rev->n;
+tail->next = NULL;
+
+while (rev->next)
+{
+rev = rev->next;
+new = malloc(sizeof(listint_t));
+new->n = rev->n;
+new->next = tail;
+tail = new;
+}
+
+rev = *head;
+new = tail;
+while (rev)
+{
+sig = rev->n == tail->n;
+if (!sig)
+break;
+rev = rev->next;
+tail = tail->next;
+}
+
+free_listint(new);
+if (sig)
+return (1);
 return (0);
-
-is_p = (right->n == (*left)->n);
-
-*left = (*left)->next;
-
-return (is_p);
 }
