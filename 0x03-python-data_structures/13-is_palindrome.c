@@ -17,8 +17,8 @@ return (1);
 tail = malloc(sizeof(listint_t));
 tail->n = rev->n;
 tail->next = NULL;
-
 while (rev->next)
+
 {
 rev = rev->next;
 new = malloc(sizeof(listint_t));
